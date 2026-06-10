@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.cache/
+.upm/
+deploy/
+*.map
+*.log
+.env
+.env.local
+uv.lock
+__pycache__/
+*.pyc
+main.py
+pyproject.toml
+database-backup.sql
+zipFile.zip
+.agents/
