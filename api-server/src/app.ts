@@ -10,10 +10,14 @@ const allowedOrigins = process.env["ALLOWED_ORIGINS"]
   ? process.env["ALLOWED_ORIGINS"].split(",").map((s) => s.trim())
   : ["http://localhost:3000", "http://localhost:5000"];
 
+const isDev = process.env["NODE_ENV"] !== "production";
+
 app.use(
   cors({
     origin: (origin, cb) => {
-      if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
+      if (!origin) return cb(null, true);
+      if (allowedOrigins.includes(origin)) return cb(null, true);
+      if (isDev && (origin.endsWith(".replit.dev") || origin.endsWith(".repl.co"))) return cb(null, true);
       cb(new Error(`CORS: origin ${origin} not allowed`));
     },
     credentials: true,
